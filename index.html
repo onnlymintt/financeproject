@@ -3,245 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Project - Q.Huong Graduation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+    <title>Finance Analysis - K62 FTU</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-pink: #fbc4ab;
-            --deep-pink: #f08080;
-            --bg-color: #fff5f5;
-            --text-dark: #4a4e69;
+            --soft-pink: #fce4ec;
+            --accent-pink: #ff85a2;
+            --dark-text: #2d3436;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
             overflow-x: hidden;
+            color: var(--dark-text);
         }
 
-        /* LỚP NGỤY TRANG (ACADEMIC STYLE) */
-        #finance-layer {
+        /* SCREEN 1: ACADEMIC LOCK (FINANCE) */
+        #lock-screen {
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: #ffffff;
-            transition: 0.8s ease-in-out;
+            background: #fff;
+            z-index: 100;
+            position: relative;
         }
 
-        .finance-content {
-            border-left: 4px solid #2d3436;
-            padding-left: 20px;
+        .academic-box {
+            text-align: left;
+            border-left: 2px solid var(--dark-text);
+            padding: 40px;
             max-width: 600px;
+            animation: fadeIn 1s ease-out;
         }
 
-        .btn-verify {
+        .btn-access {
             margin-top: 30px;
-            padding: 12px 35px;
-            background: #2d3436;
+            padding: 15px 40px;
+            background: var(--dark-text);
             color: white;
             border: none;
+            font-weight: 700;
             letter-spacing: 2px;
             cursor: pointer;
-            transition: 0.3s;
-            font-weight: 600;
+            transition: 0.4s;
         }
 
-        .btn-verify:hover {
-            background: var(--deep-pink);
-            transform: translateY(-3px);
+        .btn-access:hover {
+            background: var(--accent-pink);
+            transform: skewX(-10deg);
         }
 
-        /* GIAO DIỆN CHÍNH (POLAROID VIBE) */
-        #surprise-layer {
+        /* SCREEN 2: SURPRISE LAYER */
+        #surprise-screen {
             display: none;
-            padding: 80px 20px;
-            background: linear-gradient(180deg, #fff5f5 0%, #ffe3e3 100%);
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #fff5f5, #ffe0e9, #fce4ec, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 50px 20px;
+            position: relative;
         }
 
-        .main-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            color: var(--deep-pink);
-            margin-bottom: 20px;
-            font-style: italic;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .heart-divider {
-            font-size: 2rem;
-            color: var(--deep-pink);
-            margin: 20px 0;
-        }
-
-        .message-box {
-            max-width: 700px;
-            margin: 0 auto 60px auto;
-            line-height: 2;
-            font-size: 1.1rem;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        /* CẤU TRÚC POLAROID HIỆN ĐẠI */
-        .gallery {
+        /* FLOATING POLAROID LAYOUT */
+        .polaroid-wrapper {
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            padding: 20px;
+            perspective: 1000px;
+            margin-top: 20px;
         }
 
-        .polaroid {
+        .single-polaroid {
             background: white;
-            padding: 15px 15px 50px 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 20px 20px 60px 20px;
+            width: 350px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+            border-radius: 4px;
+            transform: rotateX(10deg);
+            animation: float 4s ease-in-out infinite;
+            transition: transform 0.2s ease-out;
+            position: relative;
+        }
+
+        .single-polaroid img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
             border-radius: 2px;
         }
 
-        .polaroid img {
-            width: 280px;
-            height: 350px;
-            object-fit: cover;
-            filter: sepia(20%) contrast(1.1); /* Hiệu ứng màu ảnh cũ nhẹ */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
         }
 
-        .polaroid:hover {
-            transform: scale(1.05) rotate(0deg) !important;
-            box-shadow: 0 30px 50px rgba(240, 128, 128, 0.2);
+        .main-wish {
+            text-align: center;
+            max-width: 800px;
+            margin: 40px auto;
         }
 
-        .caption {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-top: 20px;
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            color: var(--accent-pink);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .long-message {
+            font-size: 1.1rem;
+            line-height: 2;
             color: #555;
+            text-align: justify;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
         }
 
-        /* MUSIC BAR */
-        .music-widget {
+        /* ELEMENTS */
+        .floating-emoji {
+            position: absolute;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .music-player {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 15px;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
         }
 
-        /* PHÁO HOA TIM */
-        .heart {
-            position: fixed;
-            font-size: 1.5rem;
-            top: -50px;
-            z-index: 999;
-            animation: heartFall linear forwards;
+        #play-btn {
+            background: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--accent-pink);
         }
 
-        @keyframes heartFall {
-            to { transform: translateY(110vh) rotate(360deg); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <section id="finance-layer">
-        <div class="finance-content">
-            <h4 style="letter-spacing: 5px; color: #999;">FINAL PROJECT</h4>
-            <h1 style="font-size: 2.5rem; margin: 10px 0;">Portfolio Optimization Strategy</h1>
-            <p>Student ID: FTU-K46-2026</p>
-            <p style="color: #666; font-style: italic;">"Analyzing the correlation between institutional quality and sustainable growth."</p>
-            <button class="btn-verify" onclick="openGift()">VERIFY DATA</button>
+    <section id="lock-screen">
+        <div class="academic-box">
+            <p style="font-weight: 700; color: #999;">FOREIGN TRADE UNIVERSITY</p>
+            <h2 style="font-size: 2rem; margin: 10px 0;">Corporate Finance Management</h2>
+            <p>Case Study: Risk-Return Tradeoff in Equity Markets</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">Author: Thy (K62 FTU)</p>
+            <button class="btn-access" onclick="startSurprise()">UNLOCK REPORT</button>
         </div>
     </section>
 
-    <section id="surprise-layer">
-        <div style="text-align: center;">
-            <h1 class="main-title" data-aos="fade-up">Happy Graduation, Q.Huong</h1>
-            <div class="heart-divider" data-aos="zoom-in">♥</div>
+    <section id="surprise-screen">
+        <div class="main-wish">
+            <h1 id="title">Happy Graduation!</h1>
             
-            <div class="message-box" data-aos="fade-up" data-aos-delay="200">
-                <p>Cuối cùng cũng đến rồi lễ tốt nghiệp, <br>ngày mà <strong>Quỳnh Hương</strong> thật sự trưởng thành.</p>
-                <p style="font-size: 1.4rem; color: var(--deep-pink); font-style: italic;">"I love u a lot, u always be my sunshine."</p>
-                <p>I wish u have a great journey ahead! ✨</p>
+            <div class="polaroid-wrapper" id="moveBox">
+                <div class="single-polaroid">
+                    <img src="huong.jpg" alt="Quynh Huong">
+                    <p style="margin-top: 20px; font-weight: 700; color: #888; letter-spacing: 2px;">GRADUATION DAY 2026</p>
+                </div>
             </div>
 
-            <div class="gallery">
-                <div class="polaroid" data-aos="fade-right" data-aos-delay="400" style="transform: rotate(-5deg);">
-                    <img src="huong.jpg" alt="Memory 1">
-                    <div class="caption">The Beginning...</div>
-                </div>
-
-                <div class="polaroid" data-aos="fade-up" data-aos-delay="600" style="transform: rotate(3deg);">
-                    <img src="huong.jpg" alt="Memory 2">
-                    <div class="caption">Our Sunshine ☀️</div>
-                </div>
-
-                <div class="polaroid" data-aos="fade-left" data-aos-delay="800" style="transform: rotate(-2deg);">
-                    <img src="huong.jpg" alt="Memory 3">
-                    <div class="caption">Great Journey Ahead</div>
-                </div>
+            <div class="long-message">
+                <p>Cuối cùng cũng đến rồi lễ tốt nghiệp, ngày mà Quỳnh Hương thật sự trưởng thành và bước sang một trang mới rực rỡ hơn. Chị biết không, đối với em, chị không chỉ là một người chị mà còn là một món quà vô cùng đặc biệt — <strong>You are such a gift in my life.</strong> ✨</p>
+                <br>
+                <p>Nhìn lại hành trình vừa qua, em thấy cực kỳ ngưỡng mộ sự nỗ lực và bản lĩnh của chị. Cảm ơn chị vì đã luôn là ánh nắng ấm áp, luôn dẫn dắt và truyền cảm hứng cho đứa em K62 này. <strong>I love u a lot, u always be my sunshine.</strong> ☀️</p>
+                <br>
+                <p>I wish u have a great journey ahead! Mong rằng chặng đường sắp tới của chị sẽ ngập tràn màu hồng, sự tự tin và những thành công vang dội nhất. Thương chị rất nhiều!</p>
             </div>
         </div>
 
-        <div class="music-widget">
-            <span style="font-size: 0.8rem; font-weight: 600;">🎵 Now Playing</span>
-            <audio id="myAudio" loop>
+        <div class="music-player">
+            <audio id="bgMusic" loop>
                 <source src="music.mp3" type="audio/mpeg">
             </audio>
-            <button onclick="toggleMusic()" id="musicBtn" style="border:none; background:none; cursor:pointer; font-size:1.2rem;">▶️</button>
+            <button id="play-btn" onclick="toggleMusic()">🎵 PLAY MUSIC</button>
         </div>
     </section>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true });
+        // Hiệu ứng Parallax cho Polaroid
+        const box = document.getElementById('moveBox');
+        document.addEventListener('mousemove', (e) => {
+            let x = (window.innerWidth / 2 - e.pageX) / 25;
+            let y = (window.innerHeight / 2 - e.pageY) / 25;
+            box.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+        });
 
-        function openGift() {
-            document.getElementById('finance-layer').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('finance-layer').style.display = 'none';
-                document.getElementById('surprise-layer').style.display = 'block';
-                createHearts();
-                // Tự động bật nhạc (nếu trình duyệt cho phép)
-                toggleMusic();
-            }, 800);
+        function startSurprise() {
+            document.getElementById('lock-screen').style.display = 'none';
+            document.getElementById('surprise-screen').style.display = 'block';
+            spawnEmojis();
         }
 
         function toggleMusic() {
-            var audio = document.getElementById("myAudio");
-            var btn = document.getElementById("musicBtn");
-            if (audio.paused) {
-                audio.play();
-                btn.innerHTML = "⏸️";
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('play-btn');
+            if (music.paused) {
+                music.play();
+                btn.innerText = "⏸ PAUSE";
             } else {
-                audio.pause();
-                btn.innerHTML = "▶️";
+                music.pause();
+                btn.innerText = "🎵 PLAY MUSIC";
             }
         }
 
-        function createHearts() {
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    let heart = document.createElement('div');
-                    heart.classList.add('heart');
-                    heart.innerHTML = ['🌸','💖','✨','🎀'][Math.floor(Math.random()*4)];
-                    heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                    heart.style.opacity = Math.random();
-                    document.body.appendChild(heart);
-                }, i * 100);
-            }
+        // Hiệu ứng emoji bay liên tục
+        function spawnEmojis() {
+            const emojis = ['🌸', '💖', '✨', '🎓', '🎀', '🧸'];
+            setInterval(() => {
+                const el = document.createElement('div');
+                el.className = 'floating-emoji';
+                el.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.top = '100vh';
+                el.style.opacity = Math.random();
+                document.body.appendChild(el);
+
+                const anim = el.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(-110vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], { duration: 4000 + Math.random() * 3000 });
+
+                anim.onfinish = () => el.remove();
+            }, 300);
         }
     </script>
 </body>
