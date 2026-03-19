@@ -11,13 +11,14 @@
             --soft-pink: #fff0f3;
             --deep-pink: #ff85a2;
             --gray-light: #f8f9fa;
+            --dark: #2d3436;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-        body { background-color: var(--white); overflow: hidden; height: 100vh; }
+        body { background-color: var(--white); overflow-x: hidden; min-height: 100vh; }
 
-        /* LAYER 1: CHUYÊN NGHIỆP (FINANCE) */
+        /* LAYER 1: FINANCE DASHBOARD */
         #layer-finance {
             height: 100vh;
             display: flex;
@@ -27,90 +28,103 @@
             z-index: 10;
         }
 
-        .sidebar { width: 250px; border-right: 1px solid #eee; padding: 30px; }
-        .main-panel { flex: 1; padding: 50px; }
+        .sidebar { width: 250px; border-right: 1px solid #eee; padding: 30px; display: flex; flex-direction: column; }
+        .main-panel { flex: 1; padding: 60px; background: #fff; }
         
         .stat-card {
             background: var(--gray-light);
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
-            margin-bottom: 20px;
-            border-left: 5px solid #2d3436;
+            flex: 1;
+            border-left: 5px solid var(--dark);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
         }
 
         .btn-check {
-            padding: 15px 30px;
-            background: #2d3436;
+            padding: 18px 35px;
+            background: var(--dark);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 700;
+            font-size: 1rem;
             transition: 0.3s;
+            letter-spacing: 1px;
         }
 
-        .btn-check:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .btn-check:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background: #000;
+        }
 
-        /* LAYER 2: CUTE GALAXY (SECRET) */
+        /* LAYER 2: SURPRISE PINK */
         #layer-surprise {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute;
+            top: 0; left: 0; width: 100%; min-height: 100vh;
             background: var(--soft-pink);
             display: none;
             opacity: 0;
-            transition: 1s;
+            transition: opacity 1s ease;
             z-index: 5;
-            padding: 40px;
+            padding: 60px 20px;
             text-align: center;
+            overflow-y: auto;
         }
 
-        /* POLAROID SÁNG TẠO */
         .polaroid-frame {
             background: white;
             padding: 15px 15px 60px 15px;
-            width: 320px;
-            margin: 20px auto;
-            box-shadow: 0 20px 50px rgba(255, 133, 162, 0.2);
-            border-radius: 5px;
-            position: relative;
+            width: 340px;
+            margin: 30px auto;
+            box-shadow: 0 25px 50px rgba(255, 133, 162, 0.25);
+            border-radius: 4px;
             cursor: pointer;
-            transition: 0.5s;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
 
-        .polaroid-frame img { width: 100%; height: 350px; object-fit: cover; border-radius: 2px; }
+        .polaroid-frame img { width: 100%; height: 380px; object-fit: cover; border-radius: 2px; }
+        .polaroid-frame:hover { transform: scale(1.05) rotate(-2deg); }
 
-        .polaroid-frame:hover { transform: scale(1.02) rotate(2deg); }
-
-        /* NÚT BẤM INTERACTIVE */
-        .button-group { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
+        /* BUTTON GROUP */
+        .button-group { display: flex; justify-content: center; gap: 15px; margin-top: 40px; flex-wrap: wrap; }
 
         .btn-pink {
             background: white;
             border: 2px solid var(--deep-pink);
             color: var(--deep-pink);
-            padding: 12px 25px;
-            border-radius: 30px;
+            padding: 14px 28px;
+            border-radius: 50px;
             font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 133, 162, 0.1);
         }
 
-        .btn-pink:hover { background: var(--deep-pink); color: white; transform: scale(1.1); }
+        .btn-pink:hover { 
+            background: var(--deep-pink); 
+            color: white; 
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(255, 133, 162, 0.3);
+        }
 
-        /* MESSAGE BOX */
+        /* WISH TEXT */
         #wish-text {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 20px;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 25px;
             display: none;
-            animation: slideUp 0.5s ease-out;
-            line-height: 1.8;
-            color: #555;
+            line-height: 2;
+            color: #444;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: justify;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         .heart-float {
             position: fixed;
@@ -121,59 +135,72 @@
 
         @keyframes fly {
             0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
         }
+
+        h1 { font-weight: 700; letter-spacing: -1px; }
     </style>
 </head>
 <body>
 
     <div id="layer-finance">
         <div class="sidebar">
-            <h2 style="font-size: 1.2rem; margin-bottom: 40px;">FTU ANALYTICS</h2>
-            <p style="color: #999; font-size: 0.8rem;">Projects</p>
-            <p style="margin-top: 10px; font-weight: 700;">Finance_K62_Thy.xlsx</p>
+            <h2 style="font-size: 1.1rem; color: var(--dark); margin-bottom: 50px; border-bottom: 2px solid var(--dark); padding-bottom: 10px;">FTU ANALYTICS</h2>
+            <p style="color: #bbb; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Current Project</p>
+            <p style="margin-top: 10px; font-weight: 700; font-size: 0.9rem;">Finance_K62_Thy.xlsx</p>
         </div>
         <div class="main-panel">
-            <h1>Corporate Valuation Report</h1>
-            <div style="display: flex; gap: 20px; margin: 40px 0;">
-                <div class="stat-card"><h3>NPV</h3><p>+1,250.00</p></div>
-                <div class="stat-card"><h3>IRR</h3><p>18.5%</p></div>
+            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Corporate Valuation</h1>
+            <p style="color: #999; margin-bottom: 40px;">Quantitative Analysis of Market Risk Factors</p>
+            
+            <div style="display: flex; gap: 20px; margin-bottom: 40px;">
+                <div class="stat-card">
+                    <p style="font-size: 0.8rem; color: #888; font-weight: 700;">NPV FORECAST</p>
+                    <h3 style="font-size: 1.8rem; margin-top: 5px;">+1,250.00</h3>
+                </div>
+                <div class="stat-card">
+                    <p style="font-size: 0.8rem; color: #888; font-weight: 700;">IRR THRESHOLD</p>
+                    <h3 style="font-size: 1.8rem; margin-top: 5px;">18.52%</h3>
+                </div>
             </div>
-            <p style="color: #666; margin-bottom: 30px;">Dữ liệu đã sẵn sàng để truy xuất. Vui lòng xác thực quyền truy cập của sinh viên K62.</p>
-            <button class="btn-check" onclick="revealSecret()">AUTHENTICATE & VIEW</button>
+
+            <p style="color: #555; max-width: 500px; line-height: 1.6; margin-bottom: 40px;">
+                Dữ liệu báo cáo tài chính đã được tổng hợp. Vui lòng xác thực quyền truy cập dành riêng cho sinh viên K62 để xem chi tiết mô hình.
+            </p>
+            <button class="btn-check" onclick="revealSecret()">AUTHENTICATE & ACCESS</button>
         </div>
     </div>
 
     <div id="layer-surprise">
-        <h1 style="color: var(--deep-pink); font-size: 2.5rem; letter-spacing: -1px;">Happy Graduation! 🎓</h1>
+        <h1 style="color: var(--deep-pink); font-size: 3rem; margin-bottom: 10px;">Happy Graduation! 🎓</h1>
+        <p style="color: #888; font-weight: 300;">For our dearest Quynh Huong</p>
         
         <div class="polaroid-frame" onclick="createHeart(event)">
             <img src="huong.jpg" alt="Quynh Huong">
-            <p style="margin-top: 20px; color: #aaa; letter-spacing: 3px; font-size: 0.7rem;">TAP FOR LOVE ❤️</p>
+            <p style="margin-top: 25px; color: #bbb; letter-spacing: 4px; font-size: 0.7rem; font-weight: 700;">TOUCH FOR LOVE ❤️</p>
         </div>
 
         <div class="button-group">
-            <button class="btn-pink" onclick="showMessage()">Đọc lời nhắn từ Thy 💌</button>
-            <button class="btn-pink" onclick="playMusic()">Bật nhạc chill 🎵</button>
+            <button class="btn-pink" onclick="showMessage(this)">Đọc lời nhắn từ Thy 💌</button>
+            <button class="btn-pink" id="musicBtn" onclick="playMusic()">Bật nhạc chill 🎵</button>
             <button class="btn-pink" onclick="extraHearts()">Thả tim bay tung tóe ✨</button>
         </div>
 
         <div id="wish-text">
             <p>Cuối cùng cũng đến rồi lễ tốt nghiệp, ngày mà <strong>Quỳnh Hương</strong> thật sự trưởng thành.</p>
-            <p> Và đối với em, chị không chỉ là một người chị mà còn là một món quà vô cùng đặc biệt <strong> Một món quà mà em nghĩ ông trời đã ban tặng em <3 </strong> ✨</p>
+            <p>Và đối với em, chị không chỉ là một người chị mà còn là một món quà vô cùng đặc biệt — <strong>Một món quà mà em nghĩ ông trời đã ban tặng em ❤️</strong></p>
             <br>
-            <p>Em rất quý cái cách chị luôn rạng rỡ, bản lĩnh và nỗ lực hết mình vì đam mê của mình. <strong>I love u a lot, u always be my sunshine.</strong> ☀️</p>
-            <p>I wish u have a great journey ahead! Luôn tự tin và hạnh phúc như bây giờ chị nhé!</p>
+            <p>Em rất quý cái cách chị luôn rạng rỡ, bản lĩnh và nỗ lực hết mình vì đam mê. <strong>I love u a lot, u always be my sunshine.</strong> ☀️</p>
+            <p>I wish u have a great journey ahead! Luôn tự tin và rực rỡ như bây giờ chị nhé!</p>
         </div>
 
         <audio id="bgMusic" loop>
-            <source src="https://www.youtube.com/watch?v=9U8uA702xrE&list=RD9U8uA702xrE&start_radio=1" type="audio/mpeg">
+            <source src="music.mp3" type="audio/mpeg">
         </audio>
     </div>
 
     <script>
         function revealSecret() {
-            // Hiệu ứng dịch chuyển layer
             const fLayer = document.getElementById('layer-finance');
             const sLayer = document.getElementById('layer-surprise');
             
@@ -181,44 +208,59 @@
             setTimeout(() => {
                 fLayer.style.display = 'none';
                 sLayer.style.display = 'block';
-                setTimeout(() => { sLayer.style.opacity = '1'; }, 100);
+                setTimeout(() => { 
+                    sLayer.style.opacity = '1'; 
+                }, 50);
             }, 800);
         }
 
-        function showMessage() {
+        function showMessage(btn) {
             const txt = document.getElementById('wish-text');
             txt.style.display = 'block';
+            txt.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            btn.style.display = 'none'; // Ẩn nút sau khi đọc
         }
 
         function playMusic() {
             const music = document.getElementById('bgMusic');
-            if(music.paused) music.play(); else music.pause();
+            const btn = document.getElementById('musicBtn');
+            if(music.paused) {
+                music.play();
+                btn.innerHTML = "Đang phát nhạc... ⏸️";
+                btn.style.background = "var(--deep-pink)";
+                btn.style.color = "white";
+            } else {
+                music.pause();
+                btn.innerHTML = "Bật nhạc chill 🎵";
+                btn.style.background = "white";
+                btn.style.color = "var(--deep-pink)";
+            }
         }
 
-        // Tạo tim khi click
         function createHeart(e) {
             const heart = document.createElement('div');
             heart.className = 'heart-float';
             heart.innerHTML = '💖';
-            heart.style.left = (e.clientX || window.innerWidth/2) + 'px';
-            heart.style.top = (e.clientY || window.innerHeight/2) + 'px';
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
             heart.style.fontSize = Math.random() * 20 + 20 + 'px';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 3000);
         }
 
         function extraHearts() {
-            for(let i=0; i<30; i++) {
+            for(let i=0; i<40; i++) {
                 setTimeout(() => {
                     const x = Math.random() * window.innerWidth;
                     const heart = document.createElement('div');
                     heart.className = 'heart-float';
-                    heart.innerHTML = ['🌸','💖','✨','🎀'][Math.floor(Math.random()*4)];
+                    heart.innerHTML = ['🌸','💖','✨','🎀','🎓'][Math.floor(Math.random()*5)];
                     heart.style.left = x + 'px';
                     heart.style.top = '100vh';
+                    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
                     document.body.appendChild(heart);
-                    setTimeout(() => heart.remove(), 3000);
-                }, i * 100);
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 150);
             }
         }
     </script>
